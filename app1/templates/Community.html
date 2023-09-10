@@ -1,0 +1,52 @@
+{% extends 'ParentTemplate.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                社团情况
+                <input id="btnAdd" style="border-radius: 4px; " class="btn-info" value="新 增" type="button">
+                <a href="/upload/model/form/">新增</a>
+            </div>
+
+            <!-- Table -->
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>主题</th>
+                    <th>内容</th>
+                    <th>时间</th>
+                    <th>类型</th>
+                    <th>地点</th>
+                    <th>海报</th>
+                    <th>操作</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    {% for obj in queryset %}
+                        <th>{{ obj.id }}</th>
+                        <td>{{ obj.title }}</td>
+                        <td>{{ obj.content }}</td>
+                        <td>{{ obj.hold_time }}</td>
+{#                        有关选项的可以使用get_XX_display#}
+                        <td>{{ obj.get_active_display }}</td>
+                        <td>{{ obj.place }}</td>
+                        <td><img src="/media/{{ obj.img }} " style="width: 50px;height: 30px"></td>
+                        {#                        <img src="/media/{{ obj.img }} " style="width: 50px;height: 30px">#}
+                        <td>
+                            <a class="btn btn-danger btn-xs" href="/Community/{{ obj.id }}/delete/">删 除</a>
+                            <a class="btn btn-danger btn-xs" href="/admin/{{ obj.id }}/delete/">编 辑</a>
+                        </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

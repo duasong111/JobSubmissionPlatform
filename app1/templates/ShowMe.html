@@ -1,0 +1,32 @@
+{% extends 'ParentTemplate.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+              {{ form }}
+            </div>
+        </div>
+</div>
+
+{% endblock %}
+{% block js %}
+{#    <script src="{% static '/js/echarts.min.js' %}"></script>#}
+{#    <script type="text/javascript">#}
+{#        var DELETE_ID;#}
+{#        var EDIT_ID;#}
+{#        $(function () {#}
+{#            bindBtnMessagePortEvent();#}
+{#        })#}
+{#        function bindBtnMessagePortEvent() {#}
+{#            $("#btnPortal").click(function () {#}
+{#                EDIT_ID = undefined;#}
+{#                $("#formAdd")[0].reset();#}
+{#                $(".modal-title").text("信息门户登录");#}
+{#                $('#MessagePortal').modal('show');#}
+{#            });#}
+{#        }#}
+{##}
+{#    </script>#}
+{% endblock %}
