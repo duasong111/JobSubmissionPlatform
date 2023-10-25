@@ -1,0 +1,21 @@
+{% extends 'Students_view.html' %}
+{% load static %}
+{% block content1 %}
+<div class="">
+ <div class="panel panel-default">
+            <div class="panel-heading">
+                 {{ CollageLists }}
+            </div>
+        </div>
+</div >
+     <div class="panel panel-default">
+            <div class="panel-heading">
+                 {{ classPlans }}
+            </div>
+        </div>
+{#  这个是存在问题的-不能进行封闭  </div >#}
+
+
+{% endblock %}
+{% block js %}
+{% endblock %}

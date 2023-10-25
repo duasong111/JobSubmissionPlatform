@@ -1,0 +1,138 @@
+{% extends 'ParentTemplate.html' %}
+{% load static %}
+{% block content %}
+
+
+
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                班级列表
+                <input  id="btnAdd" style="border-radius: 4px; " class="btn-info" value="新 增" type="button">
+            </div>
+
+            <!-- Table -->
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>姓名</th>
+                    <th>学号</th>
+                    <th>寝室</th>
+                    <th>QQ</th>
+                    <th>手机号</th>
+                    <th>操作</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    {% for obj in queryset %}
+                        <th>{{ obj.id }}</th>
+                        <td>{{ obj.name }}</td>
+                        <td>{{ obj.schoolID }}</td>
+                        <td>{{ obj.bedroom }}</td>
+                        <td>{{ obj.QQID }}</td>
+                        <td>{{ obj.phoneID }}</td>
+
+
+                        <td>
+                            <input  style="border-radius: 3px; font-size: 12px; " class="btn-danger btn-delete"
+                                   value="删 除" type="button">
+                            <input  style="border-radius: 3px; font-size: 12px; " class="btn-primary  btn-edit"
+                                   value="编 辑" type="button">
+{#                            <input style="border-radius: 3px; font-size: 12px;" id="btnAdd" class="btn-info"#}
+{#                                   value="添 加" type="button">#}
+                        </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {#    进行同学的添加#}
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                    <form id="formAdd">
+                        <div class="clearfix">
+                            {% for field in form %}
+                                <div class="col-lg-6">
+                                    <div class="form-group" style="position: relative;">
+                                        <label>{{ field.label }}</label>
+                                        {{ field }}
+                                        <span class="errors_msg" style="color: #b92c28;position: absolute"></span>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                    <button id="btnSave" type="button" class="btn btn-primary">保 存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block js %}
+    <script src="{% static '/js/echarts.min.js' %}"></script>
+    <script type="text/javascript">
+        var DELETE_ID;
+        var EDIT_ID;
+        $(function () {
+            bindBtnAddEvent();
+            bindBtnSaveEvent();
+        })
+         function bindBtnAddEvent() {
+            $("#btnAdd").click(function () {
+                 EDIT_ID = undefined;
+                $("#dformAd")[0].reset();
+                $(".modal-title").text("添加人员");
+                $('#myModal').modal('show');
+            });
+        }
+         function bindBtnSaveEvent() {
+            $("#btnSave").click(function () {
+                $(".errors_msg").empty();
+                if (EDIT_ID) {
+
+                    {#doEdit();#}
+                } else {
+                    doAdd();
+                }
+
+            });
+        }
+
+        function doAdd() {
+            $.ajax({
+                url: "#",
+                type: "post",
+                data: $("#formAdd").serialize(),
+                dataType: "JSON",
+                success: function (res) {
+                    {#console.log(res);#}
+                    if (res.status) {
+                        alert("创建成功");
+                        location.reload();
+                        $("#formAdd")[0].reset();
+                        $('#myModal').modal('hide');
+
+                    }
+                }
+            })
+        }
+    </script>
+
+{% endblock %}
