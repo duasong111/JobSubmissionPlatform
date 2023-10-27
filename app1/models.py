@@ -21,8 +21,6 @@ class UserInfo(models.Model):
     password = models.CharField(verbose_name="密码", max_length=64)
 
 
-
-
 class Work_inform(models.Model):
     """作业通知表"""
     inform=models.CharField(verbose_name="通知",max_length=32)

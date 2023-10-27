@@ -39,6 +39,9 @@ def login(request):
         # print(form.cleaned_data) #来显示提交的信息
         username=form.cleaned_data['username']
         password=form.cleaned_data['password']
+        # if username not in models.UserInfo.objects.filter(username=username).first():
+        #     models.UserInfo.objects.update(username=username,password=password)
+
         LG=Login_test(username=username,password=password) #用作登录
         data=LG.login_test1()
 
@@ -79,7 +82,16 @@ class Login_test(object):
         self.password=password
     def login_test1(self):
         LG=Login()
-        result=LG.login(f'{self.username}',f'{self.password}')
+        result = LG.login(f'{self.username}', f'{self.password}')
+        if result['code'] == 1000:
+            user = models.UserInfo.objects.filter(name=self.username).first()
+            if user:
+                user.password = self.password
+                user.save()
+            else:
+                new_user = models.UserInfo(name=self.username, password=self.password)
+                new_user.save()
+
         return result
 
     # def get_shared_data(self):
