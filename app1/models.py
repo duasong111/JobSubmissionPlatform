@@ -19,6 +19,14 @@ class UserInfo(models.Model):
     """用户使用学号来进行登录--范围小一些"""
     name = models.CharField(verbose_name="姓名", max_length=16)
     password = models.CharField(verbose_name="密码", max_length=64)
+"""目前这个仅仅是为了我进行测试去写的测试"""
+class stuLogin(models.Model):
+    name = models.CharField(verbose_name="用户名",max_length=16)
+    password = models.CharField(verbose_name="密码",max_length=64)
+class teacher(models.Model):
+    name = models.CharField(verbose_name="用户名",max_length=16)
+    password = models.CharField(verbose_name="密码",max_length=64)
+
 
 
 class Work_inform(models.Model):

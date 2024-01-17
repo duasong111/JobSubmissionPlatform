@@ -1,6 +1,6 @@
 
 from django.contrib import admin
-from django.urls import path, re_path
+from django.urls import path, re_path,include
 from django.views.static import serve
 from django.conf import settings
 from app1 import views
@@ -10,6 +10,7 @@ urlpatterns = [
     #这个是media的文件的固定要求
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media'),
     # path('login/')
+
     # 作业提交模块(学委查看页面)
     path('Inform/Homework/', Inform.Inform_list),
     path('Inform/add/', Inform.Inform_add),
@@ -28,7 +29,6 @@ urlpatterns = [
 
 
 
-    #展示我的信息------
     #这个是为了展现课表
 
     path('ShowMe/BasicInfor/',ShowMe.BasicInform),

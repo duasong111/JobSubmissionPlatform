@@ -1,6 +1,5 @@
 {% extends 'ParentTemplate.html' %}
 {% block content %}
-
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -13,7 +12,7 @@
                         <div class="form-group">
                             <label>{{ field.label }}</label>
                             {{ field }}
-                            <span style="color: red;">{{ field.errors.0 }}</span>
+                            <span style=" color: red;">{{ field.errors.0 }}</span>
                         </div>
                     {% endfor %}
                     <button type="submit" class="btn btn-primary">提 交</button>
@@ -21,5 +20,4 @@
             </div>
         </div>
     </div>
-
 {% endblock %}
